@@ -1,56 +1,85 @@
 body{
 margin:0;
-font-family:Arial;
+font-family:Arial, sans-serif;
 color:white;
 text-align:center;
 min-height:100vh;
 
-/* SolFlux style gradient */
+/* SolFlux style background */
 
-background: radial-gradient(circle at 30% 20%, #0ea5e9 0%, transparent 40%),
-radial-gradient(circle at 70% 60%, #06b6d4 0%, transparent 40%),
+background:
+radial-gradient(circle at 20% 30%, rgba(14,165,233,0.35), transparent 40%),
+radial-gradient(circle at 80% 70%, rgba(6,182,212,0.35), transparent 40%),
 linear-gradient(135deg,#020617,#020617,#0f172a);
 }
 
 /* header */
 
 header{
-padding:50px;
+padding:60px 20px;
 }
 
-/* marketplace layout */
+header h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+header p{
+opacity:0.7;
+}
+
+/* wallet button */
+
+.wallet-btn{
+margin-top:20px;
+padding:12px 24px;
+border-radius:8px;
+border:none;
+background:linear-gradient(90deg,#22d3ee,#06b6d4);
+color:black;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* marketplace grid */
 
 .market{
 display:flex;
 justify-content:center;
-gap:30px;
 flex-wrap:wrap;
-margin-top:40px;
+gap:30px;
+padding:40px;
 }
 
-/* asset cards */
+/* glass cards */
 
 .card{
-background:rgba(15,23,42,0.8);
+background:rgba(15,23,42,0.65);
+border-radius:16px;
 padding:25px;
-border-radius:14px;
-width:230px;
+width:240px;
+
+backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,255,255,0.05);
 
 box-shadow:0 0 25px rgba(0,255,255,0.15);
-backdrop-filter: blur(10px);
+transition:0.3s;
 }
 
-/* button */
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 35px rgba(0,255,255,0.25);
+}
 
-button{
-background:#22d3ee;
+/* buy button */
+
+.buy-btn{
+margin-top:10px;
+padding:10px 18px;
 border:none;
-padding:10px 20px;
 border-radius:6px;
+background:#22d3ee;
 cursor:pointer;
 font-weight:bold;
-}
-
-button:hover{
-background:#06b6d4;
 }
