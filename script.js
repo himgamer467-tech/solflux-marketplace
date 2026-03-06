@@ -7,24 +7,23 @@ if (window.solana && window.solana.isPhantom) {
 try {
 
 const resp = await window.solana.connect();
-wallet = resp.publicKey.toString();
+wallet = resp.publicKey;
 
-alert("Wallet Connected: " + wallet);
+alert("Wallet Connected: " + wallet.toString());
 
 } catch (err) {
 
-alert("Wallet connection failed");
+alert("Connection failed");
 
 }
 
 } else {
 
-alert("Phantom Wallet not found. Install it.");
+alert("Install Phantom Wallet");
 
 }
 
 }
-
 
 
 async function buyAsset(price){
@@ -32,11 +31,38 @@ async function buyAsset(price){
 if(!wallet){
 
 alert("Connect wallet first");
-
 return;
 
 }
 
-alert("Buying asset for " + price + " SOL");
+const connection = new solanaWeb3.Connection(
+solanaWeb3.clusterApiUrl('devnet')
+);
+
+const transaction = new solanaWeb3.Transaction().add(
+
+solanaWeb3.SystemProgram.transfer({
+
+fromPubkey: wallet,
+
+toPubkey: new solanaWeb3.PublicKey("6RCLM6SEqRragVLJpvaNhEiH2CEaPUkKCqFrt8q1xPpU"),
+
+lamports: price * solanaWeb3.LAMPORTS_PER_SOL
+
+})
+
+);
+
+transaction.feePayer = wallet;
+
+const { blockhash } = await connection.getLatestBlockhash();
+
+transaction.recentBlockhash = blockhash;
+
+const signed = await window.solana.signTransaction(transaction);
+
+const signature = await connection.sendRawTransaction(signed.serialize());
+
+alert("Transaction sent: " + signature);
 
 }
