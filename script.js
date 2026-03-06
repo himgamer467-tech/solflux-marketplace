@@ -1,27 +1,40 @@
 let wallet = null;
 
-async function connectWallet(){
+async function connectWallet() {
 
-if(window.solana && window.solana.isPhantom){
+if (window.solana && window.solana.isPhantom) {
+
+try {
 
 const resp = await window.solana.connect();
 wallet = resp.publicKey.toString();
 
 alert("Wallet Connected: " + wallet);
 
-}else{
+} catch (err) {
 
-alert("Install Phantom Wallet");
+alert("Wallet connection failed");
+
+}
+
+} else {
+
+alert("Phantom Wallet not found. Install it.");
 
 }
 
 }
+
+
 
 async function buyAsset(price){
 
 if(!wallet){
-alert("Connect Wallet First");
+
+alert("Connect wallet first");
+
 return;
+
 }
 
 alert("Buying asset for " + price + " SOL");
